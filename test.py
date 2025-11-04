@@ -6,7 +6,7 @@ llm = ChatOpenAI(
     api_key="none"
 )
 
-response = llm.invoke("Give me a fact about whales.")
+response = llm.invoke("Give me a fact about orcas.")
 
 print(response.content)
 
@@ -16,6 +16,6 @@ print(response.content)
 #   -d '{
 #     "model": "ai/smollm2:360M-Q4_K_M",
 #     "messages": [
-#       {"role": "user", "content": "Give me a fact about whales."}
+#       {"role": "user", "content": "Give me a fact about orcas."}
 #     ]
 #   }'
