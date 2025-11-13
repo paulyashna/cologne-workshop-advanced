@@ -23,10 +23,8 @@ __DO NOT__ distribute these slides or their content without our consent.
 
 ## Lukas Heine
 ![bg right height:50%](./slides_static/lh.jpg)
-- M.Sc. Medical Engineering (Image and Data Processing)
 - Fraunhofer IMS & IIS, Siemens Healthineers
 - Final year PhD Candidate @ IKIM
-- Areas of interest: Computer Vision & DevOps
 - https://mml.ikim.nrw
 
 ---
@@ -65,29 +63,31 @@ __DO NOT__ distribute these slides or their content without our consent.
 
 # Overview
 
-| Topic | Time |
-|------|-------|
-| __Problem settings__ | ? - 10:30 |
-| Code versioning & experiment tracking | 10:30 - 11:30 |
-| Managing environments | 11:30 – 12:00 |
-| __Lunch__ | 12:00 - 13:00 |
-| Managing environments II | 13:00 – 13:15 |
+| Topic                                  | Time          |
+|----------------------------------------|---------------|
+| __Problem settings__                   | ? - 10:30     |
+| Code versioning & experiment tracking  | 10:30 - 11:30 |
+| Managing environments                  | 11:30 – 12:00 |
+| __Lunch__                              | 12:00 - 13:00 |
+| Managing environments II               | 13:00 – 13:15 |
 | Containers, registries, docker compose | 13:20 - 14:30 |
-| __Summary & Hands-on__ | 14:45 – 16:45 |
-| __Wrap-up__ | 16:45 - 17:00 |
+| __Summary & Hands-on__                 | 14:45 – 16:45 |
+| __Wrap-up__                            | 16:45 - 17:00 |
 
 ---
 # A note on the style of this workshop
 ### 3 Resources:
-1. Slides (available in Git)
-2. Recording
+1. Slides (available in Git: https://github.com/code-lukas/cologne-workshop-advanced)
+2. Recording (Part I, Part II (this session) available later)
 3. Git repository
 
 
 # :gear:  Slide provides opportunity for interaction
 
 ---
+# Quiz:
 
+# https://iccb-workshop-quiz.streamlit.app
 
 
 ---
@@ -144,35 +144,35 @@ Some frameworks are popular because they are easy to use and have good documenta
 - __HTTPS__ or __SSH__ can be used to access repositories
 
 ---
+# Git III : Rebasing vs. merging :gear:
+- If you have strong opinions on this, [have at it!](https://www.atlassian.com/git/tutorials/merging-vs-rebasing#the-golden-rule-of-rebasing)
 
-Add exercise here:
-git init, set upstream, git credentials manager
-
+---
+# Pushing an existing folder
+```bash
+cd existing_folder
+git init --initial-branch=main
+git remote add origin git@your.git.here:your_namespace/repo_name.git
+git add .
+git commit -m "chore: Initial commit"
+```
+---
+# Pushing an existing git
+```bash
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@your.git.here:your_namespace/repo_name.git
+```
 
 ---
 
 # Try it out! :gear:
-__Fork__ the following repository: https://github.com/code-lukas/cologne-workshop
+__Fork__ the following repository: https://github.com/code-lukas/cologne-workshop-advanced
 
 ---
 
-# Git III
-
-- Platforms such as GitHub and GitLab can be used as a project management platform
-  - Boards
-  - Discussions
-  - Issue tracking
-  - Knowledge base
-  - CI/CD
-- This is useful for a variety of cases, e.g.:
-  - Supervision of theses
-  - Organization of reading clubs
-  - Writing LaTeX
-
----
-
-Create an issue, develop in a branch addressing it
-
+# Linking a pull request to an issue
+[Read more](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue)
 
 ---
 
@@ -189,6 +189,21 @@ Create an issue, develop in a branch addressing it
 - No `README.md`
 
 ---
+# Regressions
+- How do find the commit where a given feature last worked?
+- `git checkout`?
+- `git bisect`!
+<!-- Inspired from https://stackoverflow.com/a/4714297 -->
+
+---
+
+# Binary search for the bad apple
+```
+git bisect start
+git bisect bad # Current version is bad
+$ git bisect good COMMIT_SHA # COMMIT_SHA is known to be good
+```
+---
 
 # Project structures
 
@@ -198,6 +213,33 @@ Create an issue, develop in a branch addressing it
 - _For configs, use readable formats like YAML or TOML_
 - _Never type numbers_ (admittedly controversial, but there is some truth to this)
 - _Keep logs of your experiments, do not just write to stdout_
+- _"Modern" experiment tracking with [Weights & Biases](https://wandb.ai/site/experiment-tracking/)_
+
+---
+# Writing a helpful README :gear:
+- What do you consider good examples of READMEs?
+- What do you expect to find?
+- What do you find difficult when writing a README?
+
+---
+
+# Completeness vs. brevity
+1. Title and summary
+2. Installation
+3. Usage
+4. Project structure (optional)
+5. Testing
+6. Contributing
+7. License
+8. Paper? Citation, acknowledgements
+
+---
+
+# Optional
+- API documentation
+- Roadmap or changelog
+- FAQ / Troubleshooting
+- Screenshots or demo GIFs
 
 ---
 
@@ -208,6 +250,18 @@ Create an issue, develop in a branch addressing it
 - Low effort templates attract low effort issues
 
 ___
+
+# Git for project / research management
+
+---
+
+![bg](./slides_static/git_issue_1.png)
+
+---
+
+![bg](./slides_static/git_issue_2.png)
+
+---
 
 # Excursion: Code styles & linting :gear:
 
@@ -228,7 +282,7 @@ ___
 
 ---
 
-# Frequently occurring files (hopefully)
+# Frequently occurring files (hopefully) :gear:
 
 - `README.md`
 - `requirements.txt`
@@ -249,7 +303,7 @@ Files and directories listed in this file **will not be considered in commits**.
 
 Keep your repositories small & safe, put everything in there that does not need to be shared.
 
----
+<!-- ---
 
 ![bg](https://preview.redd.it/whatonearthisgithub-v0-dpzac525ul4d1.png?auto=webp&s=ba2d80803ac472a0afc6fc59cd2c2f761d8cad16)
 
@@ -258,10 +312,10 @@ Keep your repositories small & safe, put everything in there that does not need 
 # Where should I store my keys then?
 
 - Variables & Secrets
-- GitHub recommendation: _If none of these options are possible, you can store authentication credentials in a .env file. Make sure to encrypt your .env file, and never push it to any repository._
+- GitHub recommendation: _If none of these options are possible, you can store authentication credentials in a .env file. Make sure to encrypt your .env file, and never push it to any repository.
 
+--- -->
 ---
-
 # Menial work
 ![bg right height:50%](https://res.cloudinary.com/leaddev/image/upload/f_auto/q_auto/dpr_auto/c_limit,w_1280,h_853/next/2024/07/Why-it-sucks-to-be-a-junior-developer-right-now-FINAL-1.png)
 
@@ -287,6 +341,18 @@ If your host system has an existing docker installation, you can use the offical
 
 ---
 
+# Let's try this! :gear:
+<!-- https://gitlab.com/personal5900739/CI-basics/ -->
+```bash
+docker run -d --name gitlab-runner --restart unless-stopped
+  -v /Users/lh/Desktop/gitlab-runner/config:/etc/gitlab-runner \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  gitlab/gitlab-runner:latest
+```
+- If you are interested in trying this yourself and need assistance, let's talk during the hands-on!
+
+---
+
 ![bg width:100%](./slides_static/ci_ui.png)
 
 ---
@@ -298,22 +364,12 @@ If your host system has an existing docker installation, you can use the offical
 
 ---
 
-# Wait ... where do I store my data?
+<!-- # Wait ... where do I store my data?
 - By default, Git is not designed to host and version large files.
 - However, there are extensions such as [git-lfs](https://git-lfs.com) that allow versioning of large files
 - Ideally, you keep your data in a secure, centralized place such as an S3 bucket that allows you to flexibly access your data.
 
----
-
-# Where do we go from here? :gear:
-
-__Researchers__: Practice commiting, branching, merging https://learngitbranching.js.org
-__Project managers / PostDocs__: issue templating, pull requests, merge requests, issue boards
-__Writing a good `README.md`__: https://github.com/TIO-IKIM/CellViT
-__Git & Overleaf__: [How to](https://www.overleaf.com/learn/how-to/Git_integration)
-__Advanced__: If GitLab is available, run the gitlab runner image locally and try to automate a daily / weekly / monthly task
-
----
+--- -->
 
 # Questions?
 
@@ -356,6 +412,38 @@ __Advanced__: If GitLab is available, run the gitlab runner image locally and tr
 Conda is able to resolve and bundle complex dependecies from non-python sources
 - **What are the downsides?**
 Conda's default dependency resolver is _slow_. Faster than installing dependencies manually, but slow enough to grind your gears. People were so frustrated that they reimplemented `conda` in C++: [Mamba](https://github.com/mamba-org/mamba)
+
+---
+# 🐍 Conda Licensing Dispute (2024 - 2025)
+
+### **Background**
+- **Anaconda, Inc.** introduced new licensing and access terms for Conda repositories.  
+- Commercial use of `repo.anaconda.com` now requires **paid enterprise subscriptions**.  
+- Authentication barriers disrupted automated and CI/CD workflows.
+
+---
+
+# **Key points of dispute**
+- **License shift:** From permissive open access → commercial restrictions.  
+- **Community backlash:**  
+  - Broke reproducibility in open research & education.  
+  - Sparked debate over “open source” vs. “free to use.”  
+- **Ecosystem response:**  
+  - Growth of **Conda-Forge** and **Mamba** and as open alternatives.  
+  - Push for fully FOSS dependency resolution and hosting.
+
+---
+
+# **Current status (late 2025)**
+- Anaconda keeps commercial licensing for its channels.  
+- **Conda-Forge** and **Mamba-Forge** act as de-facto open community hubs.  
+- Ongoing debate: *sustainability vs. openness* in package infrastructure.
+
+---
+
+# Building your own package :gear:
+- Example [`pyproject.toml`](https://github.com/TIO-IKIM/medical_image_deidentification/blob/main/pyproject.toml)
+- [Full overview](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 
 ---
 
@@ -433,13 +521,20 @@ git tag SUBMISSION $(git rev-parse HEAD)
 
 ---
 
-# Excursion: Dataset versioning :gear:
+# When do I commit, when do I backup my environment, when do I build a container?
+
+- Depends on how much (or little) you trust yourself
+- Two extremes: **Never** (please don't do this) *or* each commit triggers a CI/CD worfklow that builds a new Docker container, tags it with the `CI_COMMIT_SHORT_SHA` and pushes it to a registry
+
+---
+
+<!-- # Excursion: Dataset versioning :gear:
 - [git-lfs](https://git-lfs.com)
 - [Data Version Control](https://dvc.org)
 - [S3 bucket versioning](https://min.io/docs/minio/linux/administration/object-management/object-versioning.html)
 - [lakeFS](https://github.com/treeverse/lakeFS)
 
----
+--- -->
 
 # Excursion: (not) seeding :gear:
 
@@ -535,11 +630,6 @@ array([[0.77395605, 0.43887844, 0.85859792],
 
 ---
 
-<!-- ![bg](https://miro.medium.com/v2/resize:fit:1400/0*yIXIkKdvOB_gi9em.png) -->
-![bg](./slides_static/docker_jobs.png)
-
----
-
 # Let's try it out! :gear:
 
 `docker run --rm -it ubuntu sh`
@@ -611,7 +701,7 @@ CMD ["uvicorn", "slide_provider:slide_endpoint", "--host", "0.0.0.0", "--port", 
 
 ---
 
-```yml
+<!-- ```yml
 services:
   nginx:
     build: ./Viewer
@@ -652,7 +742,7 @@ networks:
     driver: bridge
 ```
 
----
+--- -->
 
 ```yml
 variables:
@@ -777,6 +867,61 @@ Open the Git repository in VSCode -> Reopen in container.
 
 ---
 
+# Cool Docker features :gear:
+- Have you heard of LLMs?
+```bash
+docker desktop enable model-runner
+docker desktop enable model-runner --tcp 12434
+docker model pull ai/smollm2:360M-Q4_K_M
+docker model run ai/smollm2:360M-Q4_K_M "Give me a fact about orcas."
+```
+
+---
+
+![bg](./slides_static/docker_model_runner_gui.png)
+
+
+---
+
+# Usage in scripts :gear:
+```python
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(
+    base_url="http://localhost:12434/engines/v1",
+    model="ai/smollm2:360M-Q4_K_M",
+    api_key="none"
+)
+
+response = llm.invoke("Give me a fact about orcas.")
+
+print(response.content)
+```
+---
+# `curl` alternative
+
+```bash
+curl http://localhost:12434/engines/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer none" \
+  -d '{
+    "model": "ai/smollm2:360M-Q4_K_M",
+    "messages": [
+      {"role": "user", "content": "Give me a fact about orcas."}
+    ]
+  }'
+```
+
+---
+
+# If it runs locally you can ...
+- use it on sensitive information
+- **use it together with your local runner**
+- **use it in local scripts**
+- **use it in other workflows** such as n8n
+
+---
+
 # Questions?
 
 [Docker cheat sheet](https://docs.docker.com/get-started/docker_cheatsheet.pdf)
@@ -820,20 +965,15 @@ Open the Git repository in VSCode -> Reopen in container.
 
 ---
 
-# Practical session
+# Other exercises :gear:
+- n8n workflow orchestration with locally deployed LLM
+- Docker compose: Extend the streamlit app by writing and retrieving information from a locally deployed database container (e.g. Postgres)
 
 ---
 
-![bg width:100%](./slides_static/etim.png)
+# Practical session :gear:
 
 ---
 
-![bg height:100%](./slides_static/etim_talks.png)
-
----
-
-![bg height:80%](./slides_static/etim_qr.png)
-
----
 
 # Thank you for attending!
