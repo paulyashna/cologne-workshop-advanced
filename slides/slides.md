@@ -201,8 +201,9 @@ __Fork__ the following repository: https://github.com/code-lukas/cologne-worksho
 ```
 git bisect start
 git bisect bad # Current version is bad
-$ git bisect good COMMIT_SHA # COMMIT_SHA is known to be good
+git bisect good COMMIT_SHA # COMMIT_SHA is known to be good
 ```
+
 ---
 
 # Project structures
@@ -279,6 +280,7 @@ ___
 - `git log --author=”author_name”`
 - The `checkout` operation used to be severely overloaded (branch creation, switch branch, get a certain version of a file…)
 - Easier: use `switch` and `restore`
+- `git stash`
 
 ---
 
