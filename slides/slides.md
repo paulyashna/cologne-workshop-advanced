@@ -287,15 +287,15 @@ ___
 # Frequently occurring files (hopefully) :gear:
 
 - `README.md`
-- `requirements.txt`
-- `environment.yml`
-- `Dockerfile`
-- `docker-compose.yml`
-- `.gitlab-ci.yml`
-- `poetry.lock`, `Pipfile.lock`, `uv.lock`
-- `pyproject.toml`
-- `setup.py`
-- `.gitignore`
+- `requirements.txt`  -- packages needed, pip packages etc
+- `environment.yml`  -- conda env
+- `Dockerfile` --specific container
+- `docker-compose.yml` -- specifics of a container
+- `.gitlab-ci.yml`  -- 
+- `poetry.lock`, `Pipfile.lock`, `uv.lock` --
+- `pyproject.toml` --authors, dependencies, version
+- `setup.py` --dependencies, version, 
+- `.gitignore`  --anything not supposed to be in git, like credential files, big files
 
 ---
 
@@ -339,7 +339,7 @@ Keep your repositories small & safe, put everything in there that does not need 
 
 _"Self-managed runners are GitLab Runner instances that you install, configure, and manage in your own infrastructure. You can install and register self-managed runners on all GitLab installations."_ - GitLab Docs
 
-If your host system has an existing docker installation, you can use the offical gitlab runner image. This also means that you can have local, private runner on your device that handles tasks.
+If your host system has an existing docker installation, you can use the offical gitlab runner image. This also means that you can have local, private runner on your device that handles tasks. --need to mention what kind of runner...
 
 ---
 
